@@ -3,10 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RouletteResults"
+        xmlns:p="clr-namespace:RouletteResults.ViewModels"
+        xmlns:views="clr-namespace:RouletteResults.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="RouletteResults"
+        SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style  TargetType="Grid">
+            <Setter Property="VerticalAlignment" Value ="Center"></Setter>
+        </Style>
+        <DataTemplate DataType="{x:Type p:PositionListVM}">
+            <views:PositionListView />
+        </DataTemplate>
+    </Window.Resources>
+    <Window.DataContext>
+        <p:MainWindowVM/>
+    </Window.DataContext>
     <Grid>
-
+        <Grid x:Name="MainContent">
+            <ContentControl Content="{Binding MainVM}" />
+        </Grid>
     </Grid>
 </Window>
