@@ -7,7 +7,6 @@
  </div>
 <div align="center">
 
-  ![Roulette Casino Game](https://github.com/akarcheuski/roulette-casino-game/blob/main/RouletteCasinoGame.gif)
   ![Roulette Casino Game](RouletteCasinoGame.gif)
 
 </div>
