@@ -4,6 +4,10 @@
              xmlns:local="clr-namespace:RouletteResults"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
-    </Application.Resources>
+            <ResourceDictionary>
+                <Style x:Key="DataGridCellCentered" TargetType="DataGridCell">
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                </Style>
+            </ResourceDictionary>
+        </Application.Resources>
 </Application>
