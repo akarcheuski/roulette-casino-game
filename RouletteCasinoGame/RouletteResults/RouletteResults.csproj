@@ -14,4 +14,8 @@
     <PackageReference Include="Unity.Container" Version="5.11.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RouletteResults.Data\RouletteResults.Data.csproj" />
+  </ItemGroup>
+
 </Project>
