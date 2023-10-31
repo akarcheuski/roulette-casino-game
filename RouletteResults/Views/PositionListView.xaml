@@ -1,0 +1,237 @@
+﻿<UserControl x:Name="pListView"
+             x:Class="RouletteResults.Views.PositionListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:p="clr-namespace:RouletteResults.ViewModels"
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:brush="clr-namespace:RouletteResults"
+             d:DataContext="{d:DesignInstance Type=p:PositionListVM}"
+             mc:Ignorable="d"
+             Background="Black" Height="500" Width="700">
+    <UserControl.Resources>
+        <brush:NameToBrushConverter x:Key="NameToBrushConverter"/>
+        <Style TargetType="DataGrid">
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="VerticalAlignment" Value ="Center"></Setter>
+        </Style>
+        <Style x:Key="Res" TargetType="{x:Type Border}">
+            <Setter Property="BorderBrush" Value="#424242" />
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="CornerRadius" Value="10,10, 10, 10"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="130"/>
+        </Style>
+        <Style x:Key="grdPopup" TargetType="Grid" >
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+        <Style x:Key="txtGrid" TargetType="TextBlock">
+            <Setter Property="Background" Value="{Binding ColorId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NameToBrushConverter}}"/>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="LayoutTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="90"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Background" Value="Black">
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <SolidColorBrush x:Key="Space" Color="Black" Opacity="5" />
+    </UserControl.Resources>
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Initialize"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Padding="5 0">
+            <Label Background="#009B01" Width="30" HorizontalAlignment="Right" Content ="{Binding Pos0.Number}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                   FontSize="16" Foreground="White"/>
+        </Border>
+        <DataGrid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="None"
+                  GridLinesVisibility="All"
+                  ItemsSource="{Binding PositionsColumnC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.LayoutTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-90"/>
+                </TransformGroup>
+            </DataGrid.LayoutTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Number, Mode=TwoWay}" Width="50" ElementStyle="{StaticResource txtGrid}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid 
+            Grid.Row="1" Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            AutoGenerateColumns="False"
+            HeadersVisibility="None"
+            GridLinesVisibility="All"
+            HorizontalGridLinesBrush="{StaticResource Space}"
+            VerticalGridLinesBrush="{StaticResource Space}"
+            ItemsSource="{Binding PositionsColumnB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.LayoutTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-90"/>
+                </TransformGroup>
+            </DataGrid.LayoutTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Number, Mode=TwoWay}" Width="50" ElementStyle="{StaticResource txtGrid}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Row="2" Grid.Column="1"
+                  HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            AutoGenerateColumns="False"
+            HeadersVisibility="None"
+            GridLinesVisibility="All"
+            HorizontalGridLinesBrush="{StaticResource Space}"
+            VerticalGridLinesBrush="{StaticResource Space}"
+            ItemsSource="{Binding PositionsColumnA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.LayoutTransform>
+                <TransformGroup>
+                    <RotateTransform Angle="-90"/>
+                </TransformGroup>
+            </DataGrid.LayoutTransform>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Number, Mode=TwoWay}" Width="50" ElementStyle="{StaticResource txtGrid}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="3" Grid.Column="1"  Padding="0 5 0 0" >
+            <DataGrid  x:Name="grdDozen"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="None"
+                  HorizontalScrollBarVisibility="Hidden"
+                  GridLinesVisibility="All"
+                  HorizontalGridLinesBrush="{StaticResource Space}"
+                  VerticalGridLinesBrush="{StaticResource Space}"
+                  ItemsSource="{Binding Dozens, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.LayoutTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="-90"/>
+                    </TransformGroup>
+                </DataGrid.LayoutTransform>
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="txtDozen" Binding="{Binding Name}" Width="35">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="90"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="150"/>
+                                <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                                <Setter Property="Padding" Value="10" />
+                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border Grid.Row="4" Grid.Column="1"  Padding="0 5 0 0" >
+            <DataGrid 
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="None"
+                  HorizontalScrollBarVisibility="Hidden"
+                  GridLinesVisibility="All"
+                  HorizontalGridLinesBrush="{StaticResource Space}"
+                  VerticalGridLinesBrush="{StaticResource Space}"
+                  ItemsSource="{Binding Colors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.LayoutTransform>
+                    <TransformGroup>
+                        <RotateTransform Angle="-90"/>
+                    </TransformGroup>
+                </DataGrid.LayoutTransform>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="35">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Background" Value="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NameToBrushConverter}}"/>
+                                <Setter Property="Width" Value="100"/>
+                                <Setter Property="LayoutTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="90"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Padding" Value="10" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <Popup  Grid.Row="3" Grid.Column="1" Grid.ZIndex="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" AllowsTransparency="True" PopupAnimation="Fade" IsOpen="{Binding IsOpen}"  >
+            <Border>
+                <Border.Style>
+                    <StaticResource ResourceKey="Res"/>
+                </Border.Style>
+                <Grid DataContext="{Binding Position}" Style="{StaticResource grdPopup}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Fill="Black" Height="30" />
+                    <TextBlock Grid.Row="0"  Text="{Binding Number}" FontSize="20"/>
+                    <Rectangle Grid.Row="1" Fill="Gray" Height="25" />
+                    <TextBlock Grid.Row="1"  Text="{Binding Color.Name}" FontSize="10"/>
+                    <Rectangle Grid.Row="2" Fill="Gray" Height="25" />
+                    <TextBlock Grid.Row="2" HorizontalAlignment="Center" Foreground="White" FontSize="10">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="Odd"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding EvenOdd}" Value="True">
+                                        <Setter Property="Text" Value="Even"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <Rectangle Grid.Row="3" Fill="Gray" Height="25" />
+                    <TextBlock Grid.Row="3"  Text="{Binding Dozen.Name}" FontSize="10"/>
+                    <Rectangle Grid.Row="4" Fill="Gray" Height="25" />
+                    <TextBlock Grid.Row="4"  Text="{Binding Column, StringFormat= 'Column: \{0\}'}" FontSize="10"/>
+                </Grid>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>
