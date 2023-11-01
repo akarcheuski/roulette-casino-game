@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.IO;
-using System.Windows;
 
 namespace RouletteResults.Data
 {
