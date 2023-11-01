@@ -21,4 +21,10 @@
     <Folder Include="Sql\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Sql\RouletteResultsData.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
