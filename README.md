@@ -2,7 +2,7 @@
 
  <div align="center">
 
-![Static Badge](https://img.shields.io/badge/Release-v.0.412.2-turqoise)
+![Static Badge](https://img.shields.io/badge/Release-v.0.34.2-turqoise)
 ![Static Badge](https://img.shields.io/badge/Built_with-WPF-pink)
 
  </div>
