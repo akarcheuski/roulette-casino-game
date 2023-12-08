@@ -3,8 +3,7 @@
  <div align="center">
 
 ![Static Badge](https://img.shields.io/badge/Release-v.0.34.2-turqoise)
-![Static Badge](https://img.shields.io/badge/Built_with-WPF-pink)
-![Static Badge](https://img.shields.io/badge/WPF-7.0.12-pink)
+![Static Badge](https://img.shields.io/badge/WPF-7.0.12-yellow)
 
  </div>
  <p align="center">Roulette Wheel is represented by Winning Number Simulator which generates the winning number randomly and sends it to RouletteResults over TCP, which displays it on table layout and all the associated data in pop up animation.
